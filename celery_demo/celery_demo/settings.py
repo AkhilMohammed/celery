@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a#j-q0x%shf5j6^1*t1otg=m(h-y@w^@(tf#tw4-uxy1&@)ca1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['65.2.6.185', '65.2.6.185:8080','http://65.2.6.185:8080']
 from datetime import datetime as dt, timedelta
 import os
 
@@ -43,18 +43,34 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'app',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'celery_demo.middleware.TokenBlacklistMiddleware'
+    # 'celery_demo.middleware.TokenBlacklistMiddleware',
+    
 ]
+
+USE_X_FORWARDED_PORT = True
+
+CORS_ALLOWED_ORIGINS = [
+      # Replace with the actual origin of your frontend
+    'http://65.2.6.185:8080',
+]
+# settings.py
+
+#CORS_ALLOWED_ORIGINS = ['*']
+
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'celery_demo.urls'
 

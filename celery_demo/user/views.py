@@ -17,26 +17,14 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.conf import settings
 
-'''
-class Register(APIView):
-    def post(self,request):
-        try:
 
-'''
-'''
-class Register(APIView):
-    def post(self,request):
-        try:
-            username = request.data['username']
-            password = request.data['password']
-            email = request.data['email']
-'''
 
 class RegisterAPI(APIView):
     def post(self,request):
         try:
             try:
                 logger.debug("hdjdhdh")
+                logger.debug(request.data)
                 userAvailable = CustomUser.objects.get(email=request.data['email'])
                 logger.debug("fyffyfy")
                 logger.debug("userAvailable")
@@ -48,11 +36,13 @@ class RegisterAPI(APIView):
                         userAvailable.otp = randint(1000,9999)
                         userAvailable.expiry_time = timezone.now()+timedelta(minutes=5)
                         userAvailable.save()
+                        logger.debug("its got 1")
                         return Response({"message":"Please verify with New OTP"},status=status.HTTP_400_BAD_REQUEST)
                     else:
+                        logger.debug("its got 2")
                         return Response({"message":"Please Verify with Current Otp"},status=status.HTTP_400_BAD_REQUEST)
             except :
-
+                logger.debug("its here")
                 username = request.data['userName']
                 password = request.data['password']
                 email = request.data['email']
@@ -85,14 +75,18 @@ class RegisterAPI(APIView):
                                            from_email=settings.EMAIL_HOST_USER)
                         msg.send()
                     except Exception as e:
+                        logger.debug("its there 3")
                         return Response({"data": str(e),
                                          "message": "Unable To Register",
                                          "requestStatus": 1},
                                         status=status.HTTP_400_BAD_REQUEST)
                     return Response ({"message":"User stored"}, status=status.HTTP_201_CREATED)
                 else:
+                    logger.debug("its there i 4")
                     return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            logger.debug(str(e))
+            logger.debug("its there i 5")
             return Response ({"message":str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 

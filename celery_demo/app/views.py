@@ -10,18 +10,31 @@ from .forms import *
 from user.models import CustomUser
 import logging
 logger = logging.getLogger(__name__)
-
+from django.views.decorators.csrf import csrf_exempt
 
 class RegistrationView(View):
     def get(self, request):
+        logger.debug("hfhhffhf")
         form = RegistrationForm()
         return render(request, 'register.html', {'form': form})
-
+   
+    @csrf_exempt
     def post(self, request):
+        logger.debug("hjhjhjh")
+        logger.debug("herehjjdk")
         form = RegistrationForm(request.POST)
         if form.is_valid():
             # Assuming your API endpoint is '/api/register/'
-            api_url = request.build_absolute_uri('/user/v1/register/')
+            logger.debug("here in 23")
+            scheme = request.scheme
+
+            # Get the current host (including port if present)
+            host = request.get_host()
+
+            # Construct the absolute URI with the desired path
+            api_url = f'{scheme}://{host}:8080/user/v1/register/'
+            logger.debug(api_url)
+            #api_url = 'http://65.2.6.185:8080/user/v1/register/'
             data = {
                 'userName': form.cleaned_data['userName'],
                 'password': form.cleaned_data['password'],
@@ -32,10 +45,18 @@ class RegistrationView(View):
                 'userType' : form.cleaned_data['userType']
                 # Add other fields as needed
             }
-
+            logger.debug("here in 27")
+            logger.debug("here in29")
             # Make a POST request to the registration API endpoint
-            response = requests.post(api_url, data=data)
-
+            
+            logger.debug("here in 31")
+            csrf_token = request.COOKIES.get('csrftoken')
+            headers = {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrf_token,
+                   } 
+            response = requests.post(api_url, json=data, headers=headers)
+            logger.debug("kfkkkfkf")
             if response.status_code == 201:  # Assuming the API returns a 201 status on success
                 messages.success(request, 'Registration successful')
                 request.session['registration_email'] = form.cleaned_data['email']
@@ -43,7 +64,7 @@ class RegistrationView(View):
             else:
                 error_message = response.json().get('detail', 'Registration failed')
                 messages.error(request, error_message)
-        return render(request, 'register.html', {'form': form, 'error': 'Invalid form'})
+        return render(request, 'register.html', {'form': form,'csrf_token':csrf_token, 'error': 'Invalid form'})
 
 
 class OtpView(View):
@@ -61,9 +82,9 @@ class OtpView(View):
                 'otp': form.cleaned_data['otp'],
             }
             logger.debug('here 63')
-
+            api_url = 'http://65.2.6.185:8080/user/v1/verifyotp/'
             # Make a POST request to the OTP verification API endpoint
-            response = requests.post(api_url, data=data)
+            response = requests.post(api_url, json=data)
 
             if response.status_code == 200:  # Assuming the API returns a 200 status on successful OTP verification
                 # Store the JWT in a cookie
@@ -98,7 +119,8 @@ class LoginView(View):
             }
 
             # Make a POST request to the OTP verification API endpoint
-            response = requests.post(api_url, data=data)
+            api_url = 'http://65.2.6.185:8080/user/v1/login/'
+            response = requests.post(api_url, json=data)
             logger.debug("came 95")
 
             if response.status_code == 200:  # Assuming the API returns a 200 status on successful OTP verification
