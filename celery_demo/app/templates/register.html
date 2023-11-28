@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-image: url('{% static "login.avif" %}'); /* Add your background image URL here */
+            background-image: url('{% static "login.avif" %}');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -21,19 +20,19 @@
             justify-content: center;
         }
 
-
         h2 {
             color: white;
             text-align: center;
         }
 
         form {
-            width:  400px;
+            width: 400px;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Center align the form content */
+            text-align: center;
+            margin: 0 auto; /* Center the form on larger screens */
         }
 
         form label {
@@ -64,7 +63,21 @@
 
         /* Add more styles as needed */
 
-        
+        /* Media Queries */
+        @media only screen and (max-width: 600px) {
+            form {
+                width: 100%;
+            }
+        }
+
+        @media only screen and (min-width: 601px) and (max-width: 1024px) {
+            form {
+                width: 70%;
+            }
+        }
+
+        /* Add more media queries as needed */
+
     </style>
 </head>
 <body>
@@ -78,7 +91,6 @@
             {{ form.as_p }}
             <button type="submit">Register</button>
         </form>
-        
     </div>
 </body>
 </html>

@@ -4,19 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    {% load static %}
     <style>
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        #success-container {
+            text-align: center;
+        }
+
+        #success-image {
+            width: 100px; /* Adjust the width as needed */
+            height: 100px; /* Adjust the height as needed */
+        }
+
+        #success-message {
+            color: #008000; /* Green color for the success message */
+            font-size: 24px;
+            margin-top: 20px;
         }
 
         #sidebar {
             height: 100%;
             width: 0;
             position: fixed;
-            z-index: 1;
+            z-index: 3;
             top: 0;
             left: 0;
             background-color: #111;
@@ -49,46 +68,17 @@
         #main {
             transition: margin-left .5s;
             padding: 16px;
+            z-index: 3;
+            position: relative; 
         }
 
-        #purchase-form-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        form {
-            width: 100%; /* Adjusted for responsiveness */
-            max-width: 400px; /* Added max-width for larger screens */
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        form label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        form input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        #main span {
+            font-size: 40px;
             cursor: pointer;
+            color: #ffffff;
+            z-index: 4;
         }
+
     </style>
 </head>
 <body>
@@ -106,25 +96,15 @@
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">☰</span>
     </div>
 
-    <div id="purchase-form-container">
-        <form method="post">
-            {% csrf_token %}
-            
-            <label for="Amount">Amount:</label>
-            <input type="text" id="Amount" name="Amount" required>
+    <div id="success-container">
+        <!-- Success image -->
+        <img id="success-image" src='{% static "sucess.png" %}' alt="Success Image">
 
-            <label for="card_number">Card Number:</label>
-            <input type="text" id="card_number" name="card_number" required>
-
-            <label for="expiry_date">Expiry Date:</label>
-            <input type="text" id="expiry_date" name="expiry_date" pattern="\d{2}/\d{2}/\d{4}" required>
-
-            <label for="cvv">CVV:</label>
-            <input type="password" id="cvv" name="cvv" required>
-
-            <button type="submit">Pay</button>
-        </form>
+        <!-- Success message -->
+        <p id="success-message">Payment done successfully!</p>
     </div>
+
+    
 
     <script>
         function openNav() {
@@ -136,10 +116,7 @@
             document.getElementById("sidebar").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
         }
-
-        flatpickr("#expiry_date", {
-            dateFormat: "d/m/Y",
-        });
     </script>
+
 </body>
 </html>

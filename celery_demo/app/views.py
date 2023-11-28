@@ -155,6 +155,8 @@ class HomeView(View):
 class PurchaseView(View):
     def get(self, request):
         return render(request, 'purchase.html')
+    def post(self, request):
+        return render(request, 'success.html')
 
 
 class AboutView(View):

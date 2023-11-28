@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a#j-q0x%shf5j6^1*t1otg=m(h-y@w^@(tf#tw4-uxy1&@)ca1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['65.2.6.185', '65.2.6.185:8080','http://65.2.6.185:8080']
+ALLOWED_HOSTS = ['65.2.6.185', '65.2.6.185:8080','http://65.2.6.185:8080', 'http://127.0.0.1:8080/', '127.0.0.1']
 from datetime import datetime as dt, timedelta
 import os
 
