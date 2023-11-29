@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}       
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .navigation-arrows {
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        .product-details {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="navigation-arrows" onclick="changeImage(-1)">&#9665;</span>
+        <img class="product-image" id="displayed-image" src="{% with product.image|first as first_image %}{% static first_image %}{% endwith %}" alt="Product Image">
+        <span class="navigation-arrows" onclick="changeImage(1)">&#9655;</span>
+
+        <div class="product-details">
+            <p>Price: {{ product.price }} rs</p>
+            <p>EMI Options: {{ product.emi_options }}</p>
+            <p>No. of Purchases: {{ product.purchases }}</p>
+            <p>Rating: {{ product.rating }}</p>
+            <p>Feedback: {{ product.feedback }}</p>
+            <p>Vendor: {{ product.vendor_name }}</p>
+            <p>Expected Delivery: {{ product.expected_delivery }}</p>
+
+            <label for="payment_options">Payment Options:</label>
+            <select id="payment_options" name="payment_options">
+                {% for option in product.payment_options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <script>
+        var currentImageIndex = 0;
+        var images = {{ product.image|safe }}; // Ensure the list is safe for HTML rendering
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            // Ensure the index stays within bounds
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            // Update the displayed image
+            document.getElementById('displayed-image').src = '/static/'+images[currentImageIndex];
+        }
+    </script>
+</body>
+</html>

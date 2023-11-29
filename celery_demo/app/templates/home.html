@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,12 +85,28 @@
             background-color: transparent; /* Set a background color if needed */
         }
 
-        #image-container img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px;
-            box-sizing: border-box;
-            width: calc(33.33% - 20px);
+        .card {
+                width: 100%;
+                max-width: 300px;
+                margin: 10px -1px; /* Reduced horizontal margin */
+                box-sizing: border-box;
+                text-align:  justify-all;
+                overflow: hidden;
+                border-radius: 8px; /* Add rounded corners to the card */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            }
+
+            .card img {
+                width: 100%; /* Ensure images take full width of the card */
+                height: auto;
+                border-top-left-radius: 8px; /* Round only the top-left corner */
+                border-top-right-radius: 8px; /* Round only the top-right corner */
+            }
+
+        .card-info {
+            padding: 10px;
+            background-color: #fff;
+            color: #000; /* Set the font color to black */
         }
 
         /* Media Queries */
@@ -115,8 +131,8 @@
                 font-size: 14px;
             }
 
-            #image-container img {
-                width: calc(50% - 20px);
+            .card {
+                max-width: 100%; /* Make cards full width on smaller screens */
             }
         }
 
@@ -135,10 +151,6 @@
 
             #company-details p {
                 font-size: 12px;
-            }
-
-            #image-container img {
-                width: calc(100% - 20px);
             }
         }
     </style>
@@ -165,14 +177,104 @@
 
         <!-- Image container -->
         <div id="image-container">
-            <img src='{% static "image1.jpg" %}' alt="Image 1">
-            <img src='{% static "image2.jpg" %}' alt="Image 2">
-            <img src='{% static "image3.jpg" %}' alt="Image 3">
-            <img src='{% static "image4.jpg" %}' alt="Image 4">
-            <img src='{% static "image5.jpg" %}' alt="Image 5">
-            <img src='{% static "image6.jpg" %}' alt="Image 6">
+            <div class="card">
+                <a href="{% url 'product_details' 0 %}">
+                    <img src='{% static "image1.jpg" %}' alt="Image 1">
+                    <div class="card-info">
+                        <h3>Breed Name: Guntur Chicken</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 12234 rs</p>
+                        <p>Location: Guntur</p>
+                        <p>Vendor: Guntur Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 1 %}">
+                    <img src='{% static "image2.jpg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Peru</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 123 rs</p>
+                        <p>Location: Tenali</p>
+                        <p>Vendor: Tenali Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 2 %}">
+                    <img src='{% static "image3.jpg" %}' alt="Image 3">
+                    <div class="card-info">
+                        <h3>Breed Name: Natu</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 12312 rs</p>
+                        <p>Location: Hyderabad</p>
+                        <p>Vendor: Hyderabad Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 3 %}">
+                    <img src='{% static "image4.jpg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Peru</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 1232 rs</p>
+                        <p>Location: Vijayawada</p>
+                        <p>Vendor: Guntur Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 4 %}">
+                    <img src='{% static "image5.jpg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Peru</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 123 rs</p>
+                        <p>Location: Ongole</p>
+                        <p>Vendor: Ongole Farms</p>
+                     </div>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 5 %}">
+                    <img src='{% static "image6.jpg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Peru</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 123 rs</p>
+                        <p>Location: Guntur</p>
+                        <p>Vendor: Guntur Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 6 %}">
+                    <img src='{% static "image7.jpg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Bheemavaram</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 123 rs</p>
+                        <p>Location: Guntur</p>
+                        <p>Vendor: Guntur Farms</p>
+                     </div>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'product_details' 7 %}">
+                    <img src='{% static "image8.jpeg" %}' alt="Image 2">
+                    <div class="card-info">
+                        <h3>Breed Name: Peru Cross</h3>
+                        <p>Age: 12 months</p>
+                        <p>Price: 123 rs</p>
+                        <p>Location: Guntur</p>
+                        <p>Vendor: Guntur Farms</p>
+                     </div>
+                </a>
+            </div>
+            <!-- Repeat the structure for other images -->
         </div>
-        <p> Our Farm sells great quality chickens, please refer to the purchase chick option.</p>
+        <p>Our Farm sells great quality chickens, please refer to the purchase chick option.</p>
     </div>
 
     <script>

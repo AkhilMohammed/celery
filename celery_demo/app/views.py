@@ -172,3 +172,105 @@ class FarmersView(View):
         return  render(request, 'farmers.html')
 
 
+def product_details_view(request, product_id):
+    logger.debug(f'kkfgfkgfk')
+    productList = [
+            {
+                'id': 0,
+                'image': ['/image1.jpg', '/image2.jpg', '/image3.jpg', '/image4.jpg', '/image5.jpg','/image6.jpg'],
+                'price': "122 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },
+            {
+                'id': 1,
+                'image': ['/image2.jpg'],
+                'price': "143 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },
+            {
+                'id': 2,
+                'image': ['/image3.jpg'],
+                'price': "12234 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },{
+                'id': 3,
+                'image': ['/image4.jpg'],
+                'price': "102 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },{
+                'id': 4,
+                'image': ['/image5.jpg'],
+                'price': "120 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },
+            {
+                'id': 5,
+                'image': ['/image6.jpg'],
+                'price': "156 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },
+            {
+                'id': 6,
+                'image': ['/image7.jpg'],
+                'price': "176 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            },
+            {
+                'id': 7,
+                'image':['/image8.jpg'],
+                'price': "189 rs",
+                'emi_options': [6, 12, 24],
+                'purchases': 100,
+                'rating': 4.5,
+                'feedback': 'Great product!',
+                'vendor_name': 'Guntur Farms',
+                'expected_delivery': '2-3 business days',
+                'payment_options': ['UPI', 'Card'],
+            }
+
+    ]
+    logger.debug(productList)
+    product = productList[int(product_id)]
+    return render(request, 'product.html', {'product': product})
